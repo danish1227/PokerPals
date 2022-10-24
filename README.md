@@ -1,0 +1,2 @@
+# PokerPals
+A poker application :)
