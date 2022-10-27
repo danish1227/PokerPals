@@ -34,7 +34,7 @@ def verify_and_subtract_chips(bet, player):
 chips = [Chip("Black"), Chip("Blue"), Chip("Green"), Chip("red"), Chip("white")]
 deck = Deck() 
 dealer = Player("dealer")
-me = Player({"White" : 7, "Red" :4, "Green" : 3, "Blue" : 2, "Black" : 1})
+me = Player({"White" : 1, "Red" :1, "Green" : 1, "Blue" : 1, "Black" : 1})
 change_bet = "y"
 while True:
     if change_bet[0] == "y":
@@ -149,6 +149,7 @@ while True:
         me.add_wallet(chips_to_add)
     elif me.get_value() < 21 and dealer.get_value() > 21:
         print("Player Win, Blackjack!")
+        chips_to_add = bet.copy()
         for chip in chips_to_add:
             chips_to_add[chip] = chips_to_add[chip]*2
         me.add_wallet(chips_to_add)
@@ -156,6 +157,7 @@ while True:
         print("Dealer Win")
     elif me.get_value() > dealer.get_value():
         print("Player Win")
+        chips_to_add = bet.copy()
         for chip in chips_to_add:
             chips_to_add[chip] = chips_to_add[chip]*2
         me.add_wallet(chips_to_add)
