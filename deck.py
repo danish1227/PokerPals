@@ -21,4 +21,3 @@ class Deck:
     def remove_card(self):
         card = self.cards.pop(random.randrange(len(self.get_cards())))
         return card
-        

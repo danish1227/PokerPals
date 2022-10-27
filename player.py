@@ -60,5 +60,3 @@ class Player:
             print(msg)
         else:
             print("Player is the Dealer")
-
-        
