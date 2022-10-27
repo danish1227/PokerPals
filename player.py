@@ -35,6 +35,14 @@ class Player:
     #add card to a players hand
     def add_card(self, card):
         self.hand.append(card)
+        print("Card Value: " + str(card.get_value()))
+        possible_value = self.value + card.get_value()
+        if "Ace" in [card.name for card in self.hand] and possible_value > 21:
+            for card in self.hand:
+                if card.name == "Ace" and card.value == 11:
+                    card.set_value(1)
+                    break
+        print("Card Value: " + str(card.get_value()))
         self.value += card.get_value()
     #add chips to a players hand
     def add_wallet(self, chips_amount):

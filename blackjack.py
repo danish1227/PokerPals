@@ -32,11 +32,11 @@ def verify_and_subtract_chips(bet, player):
 
 # Start game
 chips = [Chip("Black"), Chip("Blue"), Chip("Green"), Chip("red"), Chip("white")]
-deck = Deck() 
 dealer = Player("dealer")
 me = Player({"White" : 22, "Red" :10, "Green" : 6, "Blue" : 5, "Black" : 4})
 change_bet = "y"
 while True:
+    deck = Deck() 
     if change_bet[0] == "y":
         print("-----------------------------")
         me.display_chip_money(chips)
