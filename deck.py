@@ -1,4 +1,6 @@
+from random import random
 from card import Card
+import random
 
 class Deck:
     def __init__(self):
@@ -12,3 +14,7 @@ class Deck:
 
     def get_cards(self):
         return self.cards
+    def remove_card_to_hand(self):
+        card = self.cards.pop(random.randrange(len(self.get_cards())))
+        return card
+        

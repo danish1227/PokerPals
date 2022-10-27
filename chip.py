@@ -4,6 +4,9 @@ class Chip:
         self.color = color.title()
         self.value = nameValue[self.color]
     
+    def __str__(self):
+        return self.color + " : " + str(self.value)
+
     def get_value(self):
         return self.value
 
