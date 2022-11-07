@@ -12,7 +12,7 @@ def deal_card(deck, player):
     player.add_card(card)
 
 #get an amount to bet from the user
-def get_player_bet():
+def get_player_bet(): 
     black_chips = int(input("How many black chips do you want to bet?: "))
     blue_chips = int(input("How many blue chips do you want to bet?: "))
     green_chips = int(input("How many green chips do you want to bet?: "))
@@ -30,10 +30,21 @@ def verify_and_subtract_chips(bet, player):
                 else: 
                     print("Not enough " + chip.title() + " poker chips to bet " + str(bet[bet_chip.title()]) + " of them.")
 
+def get_chip_count():
+    chips = {}
+    with open('PokerPals/poker_chips.txt', 'r') as f:
+        chip_list = f.readlines()
+    chips["White"] = int(chip_list[0].strip())
+    chips["Red"] = int(chip_list[1].strip())
+    chips["Green"] = int(chip_list[2].strip())
+    chips["Blue"] = int(chip_list[3].strip())
+    chips["Black"] = int(chip_list[4].strip())
+    return chips
+
 # Start game
 chips = [Chip("Black"), Chip("Blue"), Chip("Green"), Chip("red"), Chip("white")]
 dealer = Player("dealer")
-me = Player({"White" : 22, "Red" :10, "Green" : 6, "Blue" : 5, "Black" : 4})
+me = Player(get_chip_count())
 change_bet = "y"
 while True:
     deck = Deck() 
@@ -141,7 +152,7 @@ while True:
         me.add_wallet(bet)
     elif me.get_value() > 21 and dealer.get_value() <= 21:
         print("Dealer Win")
-    elif me.get_value() < 21 and dealer.get_value() > 21:
+    elif me.get_value() <= 21 and dealer.get_value() > 21:
         print("Player Win")
         chips_to_add = bet.copy()
         for chip in chips_to_add:
@@ -167,6 +178,11 @@ while True:
     #ask to play again
     play = input("Keep Playing?(y/n): ").lower()
     if play[0] != "y":
+        chip_count =[]
+        with open('PokerPals/poker_chips.txt', 'w') as f:
+            for key in me.get_wallet():
+                chip_count.append(str(me.get_wallet()[key])+"\n")
+            f.writelines(chip_count)
         break
     else:
         #clear hands and ask if player wants to change their bet
